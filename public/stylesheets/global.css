@@ -9655,7 +9655,7 @@ h3 {
     border-color: #dee2e6;
   }
 }
-.regsiter-fill {
+regsiter-fill {
   background-color: #0108AF;
   margin-top: -16px;
   height: 100vh;
@@ -9692,7 +9692,7 @@ h3 {
 }
 
 .text-secondary-signup {
-  color: #A8D6EB;
+  color: #3BA288;
   margin-right: 10pc;
   width: 30vh;
 }

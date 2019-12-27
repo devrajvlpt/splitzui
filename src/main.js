@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import global from "./public/stylesheets/global.css";
+import css from './assets/css/main.css'
 import axios from "axios";
 
 Vue.config.productionTip = false
@@ -12,5 +12,6 @@ new Vue({
   store,
   global,
   axios,
+  css,
   render: h => h(App)
 }).$mount('#app')
