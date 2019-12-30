@@ -1,15 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Navbar from '../views/Navbar.vue'
+import Dashboard from '../views/Dashboard.vue'
+import Message from '../components/Message.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/dashboard',
-    name: 'Navbar',
-    component: Navbar
-  },
+  { 
+    path: '/',
+    name: 'Dashboard',
+    component: Dashboard,
+    children: [
+      { path: '/topic/:id/:topic_name', name: 'Message', component: Message },      
+    ]
+  }
 ]
 
 const router = new VueRouter({

@@ -1,7 +1,13 @@
 module.exports = {
   theme: {
-    extend: {}
-  },
-  variants: {},
+    extend: {
+      colors:{
+
+      },
+      spacing:{
+        '72':'18rem'
+      }
+    }
+  },  variants: {},
   plugins: []
 }

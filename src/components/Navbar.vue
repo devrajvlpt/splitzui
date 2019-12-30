@@ -19,10 +19,12 @@
                 </svg>
                 </button>
             </div>        
-            <div class="mt-2 -mx-3" v-for="topic in topics" :key="topic.id">            
-                <a :href="'/#/topic/' + topic.id + '/' + topic.topic_name"  class="flex justify-between items-center px-2 py-2" v-on:click="isActive=true">
-                    <span class="text-sm font-medium leading-tight truncate text-gray-300" v-bind:class="{'bg-teal-700 rounded py-1 px-2':isActive}">@ {{ topic.topic_name }}</span>
-                </a>                 
+            <div class="mt-1 -mx-3" v-for="topic in topics" :key="topic.id" v-on:click="selected = topic.id" v-bind:class="{'bg-indigo-700 rounded-sm':selected == topic.id}">                
+                <router-link v-bind:to="'/topic/' + topic.id + '/' + topic.topic_name">
+                    <a href="#"  class="flex justify-between items-center px-1 py-2">
+                        <span class="text-sm font-medium leading-tight truncate text-gray-300" >@ {{ topic.topic_name }}</span>
+                    </a>
+                </router-link>                
             </div>
         </div>  
         
@@ -59,27 +61,18 @@
 </template>
 
 <script>
-import { HTTP } from "../axios-common"
 
 export default {
-    
+    props:['topics'],
+
     data(){
         return{
-            topics:[],
             error: null,
+            selected: '',
             isActive:false,            
         }
     },
 
-    mounted(){
-        HTTP.get('/topic').
-        then(response => {
-            this.topics = response.data
-        })
-        .catch(error => {     
-            this.error = error       
-        })
-    }
     
 }
 </script>
