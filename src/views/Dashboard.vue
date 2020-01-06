@@ -45,7 +45,7 @@
             </div>
             <div class="bg-gray-750 h-24 flex items-center mx-3">              
               <div class="w-full">                  
-                  <InputMessage></InputMessage>
+                  <InputMessage :topic_id="this.$route.params.id"></InputMessage>
               </div>
                 
               <div class="bg-gray-700 rounded-r flex items-center h-10">                
@@ -54,7 +54,7 @@
             </div>
           </div>
 
-          <div class="mt-3 sidebar-users text-sm bg-gray-100 w-56 flex-none px-3 py-4 rounded-lg overflow-y-auto">
+          <div class="mt-3 sidebar-users text-sm bg-gray-100 w-56 flex-none px-3 py-4 rounded shadow-lg overflow-y-auto">
             <h3 class="uppercase tracking-wide font-semibold text-xs text-gray-500 mb-2">Topics Members</h3>
             <ul class="mb-6 truncate">
               <li class="text-gray-500 px-2 hover:text-gray-200 hover:bg-gray-750 py-1 my-2">
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>  
 </div>  
 </template>
 
@@ -80,7 +80,8 @@ import InputMessage from '../components/Input'
 export default {
     data(){
         return {
-            topics : []
+            topics : [],
+            createTopic:true
         }        
     },
     components: {
@@ -88,10 +89,10 @@ export default {
         NavBar,
         Message,
         UserList,
-        InputMessage
+        InputMessage        
     },
     mounted(){
-        HTTP.get('/topic').
+        HTTP.get('v1/api/topic').
         then(response => {
             this.topics = response.data
         })

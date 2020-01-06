@@ -22,6 +22,7 @@
                 <input 
                   class="block w-full max-w-xs rounded-lg border border-gray-400 pl-10 pr-4 py-2 text-sm text-gray-600 placeholder-gray-500" 
                   placeholder="Search"
+                  v-on:click="show()"
                 />
               </div>
             </div>
@@ -37,9 +38,31 @@
                 </button>
             </div>
           </div>
-
-        </header>
+        </header>        
       </div>
-
+    <!-- <createTopic class="h-screen w-full"></createTopic> -->
 </div>
 </template>
+
+<script>
+// import createTopic from './CreateTopic'
+
+export default {
+  data(){
+    return{
+
+    }
+  },
+  // methods:{
+  //   show(){
+  //     this.$modal.show('create-topic', {draggable:true});
+  //   },
+  //   hide(){
+  //     this.$modal.hide('create-topic');
+  //   }
+  // },
+  // components:{
+  //   createTopic
+  // }
+}
+</script>
