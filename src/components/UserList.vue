@@ -6,11 +6,11 @@
                     <div>
                         <button class="ml-2 py-3">
                         <img
-                            class="h-10 w-10 rounded object-cover"
-                            src="https://images.unsplash.com/photo-1485203535145-9eb0f2707965?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=144&h=144&q=80" alt="Not available">
+                            class="h-8 w-8 rounded-full object-cover"
+                            src="../assets/images/he.png" alt="Not available">
                         </button>
                     </div>
-                    <h2 class="mt-3 text-xs font-semibold text-gray-700 uppercase px-2 py-2 tracking-wide">{{ user.splitted_user.last_name }} {{ user.splitted_user.first_name }}</h2>
+                    <span class="mt-2 text-gray-800 font-sm px-2 py-2 tracking-wide">{{ user.splitted_user.last_name }} {{ user.splitted_user.first_name }}</span>
                 </div>
             </div>
         </nav>

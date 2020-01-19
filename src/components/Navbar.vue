@@ -4,7 +4,7 @@
       <nav class="mt-8">
         <div>
             <div class="flex justify-between items-center">
-              <h2 class="text-md font-semibold text-gray-300 mt-2 tracking-wide" >Topic</h2>
+              <h2 class="text-md font-semibold text-black font-black mt-2 tracking-wide" >Topic</h2>
               <button class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-600" v-on:click="show()">
                 <svg class="h-4 w-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                 width="24" height="24"
@@ -19,15 +19,18 @@
                 </svg>
                 </button>
             </div>        
-            <div class="mt-1" v-for="topic in topics" :key="topic.id" v-on:click="selected = topic.id" v-bind:class="{'bg-indigo-700 rounded-sm w-56':selected == topic.id}">
+            <div class="mt-1" v-for="topic in topics" :key="topic.id" v-on:click="selected = topic.id" v-bind:class="{'bg-indigo-600 rounded-sm focus:text-white -ml-8 w-64 px-8':selected == topic.id}">
                 <router-link v-bind:to="'/topic/' + topic.id + '/' + topic.topic_name">
                     <a href="#"  class="flex justify-between items-center px-0 py-1">
-                        <span class="text-sm leading-tight truncate text-gray-300" >@ {{ topic.topic_name }}</span>
+                        <span class="text-medium leading-tight truncate text-gray-800" >{{ topic.topic_name }}</span>
+                        <!-- <div class="border rounded bg-green-500 px-1"> -->
+                            <!-- <span class="text-xs text-white"> Admin </span> -->
+                        <!-- </div> -->
                     </a>
                 </router-link>                
             </div>
         </div>  
-        <createTopic class="h-screen w-full"></createTopic>
+        <createTopic></createTopic>
         
         
       </nav>

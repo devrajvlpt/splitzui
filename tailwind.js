@@ -6,6 +6,9 @@ module.exports = {
       },
       spacing:{
         '72':'18rem'
+      },
+      fontFamily:{
+        'sans': ['Helvetica', 'Arial', 'sans-serif'],
       }
     }
   },  variants: {},
