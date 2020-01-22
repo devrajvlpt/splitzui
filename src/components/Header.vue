@@ -4,15 +4,16 @@
         <header class="px-6">
           <div class="flex justify-between items-center py-3 border-b border-gray-200">
             <div class="flex-1 mt-3">
-              <div class="text-black text-sm font-bold">{{this.topics}}</div>
+              <div class="text-gray-700 text-md font-bold">{{this.topic.topic_name}}</div>
               <div class="flex flex-row">                
-                <div class="text-black font-sm"></div>
-                <div class="text-gray-600 font-sm px-3">Sharing netflix amount with cousins</div>
+                <div class="text-gray-500 font-bold text-sm cursor-pointer">{{ this.splitz}} |</div>
+                <!-- TODO Fix the description for TOPIC -->
+                <div class="text-gray-500 font-bold text-sm cursor-pointer px-2">Sharing netflix amount with cousins</div>
               </div>
               
             </div>
 
-            <div class="flex items-center">
+            <div class="flex items-center mt-2">
                  <div class="relative w-64">
                     <span class="absolute inset-y-0 left-0 pl-2 flex items-center">
                         <svg class="h-6  w-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -35,10 +36,10 @@
                     />
                 </div>
                 <button>
-                  <img class="h-8 w-8 text-gray-500" src="https://img.icons8.com/carbon-copy/100/000000/bell.png">
+                  <img class="mt-2 h-8 w-8 text-gray-500" src="https://img.icons8.com/carbon-copy/100/000000/bell.png">
                 </button>
 
-              <div class="relative">  
+              <div class="relative mt-2">  
                               
                   <button @click="isOpen =! isOpen" class="relative z-10 h-10 w-10 rounded-full object-cover overflow-hidden border-2 border-gray-500 focus:outline-none focus:border-indigo-500">
                       <img src="../assets/images/she.png" alt="Not available">
@@ -65,15 +66,16 @@
 
 <script>
 // import AccountDropdown from '../components/AccountDropdown'
+import { mapState } from 'vuex'
 
 export default {
-  props:['topics'],
+  
+  props:['topic_id'],
   components:{
     // AccountDropdown
   },
   created() {
     const handleEscape = (e) =>{
-
       if (e.key === 'Esc' || e.key === 'Escape'){
         this.isOpen = false
       }
@@ -81,7 +83,6 @@ export default {
     }
 
     document.addEventListener('keydown', handleEscape)
-
     this.$once('hook:beforeDestroy', () => {
       document.addEventListener('keydown', handleEscape)
     })
@@ -90,7 +91,7 @@ export default {
   data(){
     return{
       topicHeader:{},
-      isOpen: false
+      isOpen: false      
     }
   },
   methods:{
@@ -100,8 +101,21 @@ export default {
         if (localStorage.getItem('token') == undefined){
           this.$router.replace({name:"Login"});
         }
+    },
+    init(){                  
+      this.$store.dispatch('loadTopicById', this.topic_id)
+      this.$store.dispatch('loadSplitz', this.topic_id)
     }
-  }
+  },
+  watch: {
+    $route(){
+      this.init()
+    }
+  },  
+  computed: mapState([
+    'topic',
+    'splitz'
+  ])
   
 }
 </script>

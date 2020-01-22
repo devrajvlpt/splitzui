@@ -4,7 +4,7 @@
       <nav class="mt-8">
         <div>
             <div class="flex justify-between items-center">
-              <h2 class="text-md font-semibold text-black font-black mt-2 tracking-wide" >Topic</h2>
+              <h2 class="text-md font-semibold text-gray-600 font-black mt-2 tracking-wide" >Topic</h2>
               <button class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-600" v-on:click="show()">
                 <svg class="h-4 w-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                 width="24" height="24"
@@ -29,8 +29,33 @@
                     </a>
                 </router-link>                
             </div>
+
+
+            <div class="mt-64 flex justify-between items-center">
+                <h2 class="text-md font-semibold text-gray-600 font-black mt-2 tracking-wide" >Split Directly</h2>
+                <button class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-600" v-on:click="show()">
+                <svg class="h-4 w-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                    width="24" height="24"
+                    viewBox="0 0 24 24">
+                <path 
+                        stroke="currentColor" 
+                        stroke-width="2"  
+                        stroke-linecap="round"
+                        fill-rule="evenodd" 
+                        d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z">
+                </path>
+                </svg>
+                </button>
+            </div>
+
+            <div class="mt-1" v-for="user in friends" :key="user.id" v-on:click="selected = user.id" v-bind:class="{'bg-indigo-600 rounded-sm focus:text-white -ml-8 w-64 px-8':selected == user.id}">                
+                    <a href="#"  class="flex justify-between items-center px-0 py-1">
+                        <span class="text-medium leading-tight truncate text-gray-800" >{{ user.last_name }} {{ user.first_name }}</span>                        
+                    </a>                
+            </div>
         </div>  
         <createTopic></createTopic>
+        
         
         
       </nav>
@@ -41,6 +66,7 @@
 
 <script>
 import createTopic from './CreateTopic'
+import { HTTP } from '../axios-common.js'
 
 export default {
     props:['topics'],
@@ -49,9 +75,21 @@ export default {
         return{
             error: null,
             selected: '',
+            friends:[],
             isActive:false,
             createTopic:false           
         }
+    },
+    created() {            
+        let user_id = localStorage.getItem('user')
+        HTTP.get('v1/api/listfriend/' + user_id).
+        then(response => {
+           this.friends = response.data[0].users
+        }).
+        catch(error =>{
+            this.error = error
+        })
+
     },
     methods: {
         show() {

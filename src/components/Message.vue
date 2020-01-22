@@ -1,7 +1,7 @@
 <template>
     <!-- https://personas.draftbit.com/  avatar generator-->
     <!-- <a href="https://rzp.io/l/jl5L9wS" class="block uppercase bg-orange-700">Pay</a>                             -->                                
-    <div class="py-2">        
+    <div class="py-2">
         <div class="flex items-center relative ml-4">
               <button @click="isUseradd =! isUseradd" class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-600">
                 <svg class="h-4 w-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -19,15 +19,15 @@
             </button>
             <button v-if="isUseradd" @click="isUseradd=false" class="fixed inset-0 h-full w-full bg-white opacity-25 cursor-default"></button>
             <div v-if="isUseradd" class="py-2 h-32 absolute left-0 mt-20  border border-gray-300 shadow-2xl bg-white rounded-lg">
-                <div class="block text-gray-800 px-3 py-1 leading-relaxed hover:bg-teal-300 hover:text-gray-800">New Member</div>
-                <div class="block text-gray-800 px-3 py-1 leading-relaxed hover:bg-teal-300 hover:text-gray-800">Friends</div>
-                <div class="block text-gray-800 px-3 py-1 leading-relaxed hover:bg-teal-300 hover:text-gray-800">Invite</div>
+                <div class="block text-gray-800 px-3 py-1 leading-relaxed hover:bg-teal-300 hover:text-white">New Member</div>
+                <div class="block text-gray-800 px-3 py-1 leading-relaxed hover:bg-teal-300 hover:text-white">Friends</div>
+                <div class="block text-gray-800 px-3 py-1 leading-relaxed hover:bg-teal-300 hover:text-white">Invite</div>
             </div>
             
             
         </div>
-
-    <div class="mt-4 text-sm text-gray-400 overflow-auto block bg-gray-200 py-4 overflow-y-visible"  v-for="splitz in splitz_details" :key="splitz.id" >        
+    <div class="md:mt-72">
+        <div class="text-sm text-gray-400 overflow-auto border-t border-gray-300 py-4 overflow-y-visible"  v-for="splitz in splitz_details" :key="splitz.id" >        
             <div class="flex ml-1 my-3 py-4 px-3">
                 <div class="flex-none">
                     <button class="ml-2 py-3">
@@ -61,8 +61,9 @@
                     </div>                    
                 </div>
             </div>
-            
+        </div>
     </div>
+    
     <paymentStart></paymentStart>
     </div>
 </template>

@@ -5,7 +5,10 @@ module.exports = {
 
       },
       spacing:{
-        '72':'18rem'
+        '28':'7rem',
+        '72':'18rem',
+        '76':'18.5rem',
+        '78':'24rem',
       },
       fontFamily:{
         'sans': ['Helvetica', 'Arial', 'sans-serif'],

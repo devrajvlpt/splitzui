@@ -10,7 +10,7 @@
                             src="../assets/images/he.png" alt="Not available">
                         </button>
                     </div>
-                    <span class="mt-2 text-gray-800 font-sm px-2 py-2 tracking-wide">{{ user.splitted_user.last_name }} {{ user.splitted_user.first_name }}</span>
+                    <span class="mt-2 text-gray-800 font-sm px-2 py-2 tracking-wide">{{ user.splitted_user.last_name }} {{ user.splitted_user.first_name }}</span>                    
                 </div>
             </div>
         </nav>
