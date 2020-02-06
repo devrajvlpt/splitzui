@@ -11,7 +11,8 @@ module.exports = {
         '78':'24rem',
       },
       fontFamily:{
-        'sans': ['Helvetica', 'Arial', 'sans-serif'],
+        
+        'sans': ['Montserrat', 'sans-serif'],
       }
     }
   },  variants: {},

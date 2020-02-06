@@ -58,8 +58,8 @@ export default {
                     mobile_number:this.mobile_number,
                     password:this.password,
                     email:this.email,
-                    first_name:this.password,
-                    last_name:this.mobile_number,                    
+                    first_name:this.first_name,
+                    last_name:this.last_name,                    
                 }).then(response=> {                    
                     this.$router.replace({name:"Login"});
                     return response

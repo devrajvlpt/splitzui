@@ -40,7 +40,7 @@ export default {
             if (this.username !== "" && this.password !==""){
                 
                 HTTP.post('auth-jwt',{
-                    mobile_number:this.username,
+                    user_name:this.username,
                     password:this.password
                 }).then(response=> {
                     localStorage.setItem('token',response.data['token']);

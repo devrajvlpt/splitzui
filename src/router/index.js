@@ -4,6 +4,7 @@ import Dashboard from '../views/Dashboard.vue'
 import Message from '../components/Message.vue'
 import Login from '../components/login'
 import Register from '../components/Register'
+import PaymentStart from '../components/PaymentStart.vue'
 
 Vue.use(VueRouter)
 function authGaurd(to, from, next){
@@ -35,7 +36,16 @@ const routes = [
     beforeEnter: authGaurd,
     children: [
       { path: '/topic/:id/:topic_name', name: 'Message', component: Message, beforeEnter: authGaurd},      
+      { path: '/user/:id/:first_name',  name: 'Message', component: Message,  beforeEnter: authGaurd},
+      { path:'/payment/listoptions',   name: 'PaymentStart', component: PaymentStart, beforeEnter: authGaurd},
+      
     ]
+  },
+  { 
+      path:'/accounts/settings',   
+      name: 'PaymentStart', 
+      component: PaymentStart, 
+      beforeEnter: authGaurd
   },
   {
     path:'/login',
@@ -48,7 +58,8 @@ const routes = [
     name:'Register',
     component:Register,
     // beforeEnter: beforeEnterLogin
-  }
+  },
+  
 
 ]
 

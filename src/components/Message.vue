@@ -3,7 +3,7 @@
     <!-- <a href="https://rzp.io/l/jl5L9wS" class="block uppercase bg-orange-700">Pay</a>                             -->                                
     <div class="py-2">
         <div class="flex items-center relative ml-4">
-              <button @click="isUseradd =! isUseradd" class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-600">
+              <button v-on:click="show()" class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-600">
                 <svg class="h-4 w-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                     width="24" height="24"
                     viewBox="0 0 24 24">
@@ -16,18 +16,12 @@
                     </path>
                 </svg>
                 <div class="px-2 text-sm font-normal text-gray-600 font-black tracking-wide">Add member</div>                                
-            </button>
-            <button v-if="isUseradd" @click="isUseradd=false" class="fixed inset-0 h-full w-full bg-white opacity-25 cursor-default"></button>
-            <div v-if="isUseradd" class="py-2 h-32 absolute left-0 mt-20  border border-gray-300 shadow-2xl bg-white rounded-lg">
-                <div class="block text-gray-800 px-3 py-1 leading-relaxed hover:bg-teal-300 hover:text-white">New Member</div>
-                <div class="block text-gray-800 px-3 py-1 leading-relaxed hover:bg-teal-300 hover:text-white">Friends</div>
-                <div class="block text-gray-800 px-3 py-1 leading-relaxed hover:bg-teal-300 hover:text-white">Invite</div>
-            </div>
-            
-            
+            </button>            
+            <AddMember></AddMember>
         </div>
-    <div class="md:mt-72">
-        <div class="text-sm text-gray-400 overflow-auto border-t border-gray-300 py-4 overflow-y-visible"  v-for="splitz in splitz_details" :key="splitz.id" >        
+    <div class="xl:mt-78 lg:top-0">
+        
+        <div class="text-sm text-gray-400 overflow-auto border-t border-gray-300 py-4 overflow-y-visible"  v-for="splitz in splitz_details" :key="splitz.id" >                    
             <div class="flex ml-1 my-3 py-4 px-3">
                 <div class="flex-none">
                     <button class="ml-2 py-3">
@@ -48,12 +42,17 @@
                         <span class="text-black text-center px-1"> {{ splitz.splitted_amount }}</span>  
                         <span class="text-gray-700 font-smeibold">INR</span>
                     </div>
+
+                    <div class="mt-2">
+                        <span class="px-2 py-1 leading-tight inline-flex items-center bg-red-200 rounded">
+                        <svg class="h-2 w-2 text-red-500" viewBox="0 0 8 8" fill="currentColor">
+                          <circle cx="4" cy="4" r="3"></circle>
+                        </svg>
+                        <span class="ml-2 text-sm text-red-500 font-medium">Not Paid</span>
+                      </span>
+                    </div>
+                     
                     
-                    <!-- <div>
-                        <span class="text-gray-700 font-smeibold">Total:</span>
-                        <span class="px-1 text-black text-center"> {{ splitz.topic_id.total_amount }}</span>  
-                        <span class="text-gray-700 font-smeibold">INR</span>
-                    </div> -->
                     <div class="flex flex-row justify-between">
                         <div class="w-16 items-center ml-3 px-3 mt-2 py-1 bg-indigo-500 hover:bg-indigo-800 rounded shadow-xl hidden">
                             <button class="text-white  uppercase px-2 overflow-hidden foucs:appearance-none" v-on:click="makePayment()">Pay</button>
@@ -62,27 +61,21 @@
                 </div>
             </div>
         </div>
-    </div>
-    
-    <paymentStart></paymentStart>
+    </div>        
     </div>
 </template>
 
 <script>
 import { HTTP } from '../axios-common'
-import paymentStart from './PaymentStart'
+import AddMember from './AddMember'
 
 export default ({    
     props:['topic_id'],
-    components:{
-        paymentStart
-    },
+    
     data() {
         return{
             splitz_details:[],            
-            error:null,
-            paymentStart:false,
-            isUseradd:false,
+            error:null,            
         }
     },    
     methods:{
@@ -102,6 +95,13 @@ export default ({
         },
         declinePay(){
                 
+        },
+
+        show() {
+            this.$modal.show('add-member',{ draggable: true });
+        },
+        hide() {
+            this.$modal.hide('add-member');
         }
     },
     
@@ -118,19 +118,10 @@ export default ({
         }).
         catch(error =>{
             this.error = error
-        })
-
-        const handleEscape = (e) =>{
-            if (e.key === 'Esc' || e.key === 'Escape'){
-                this.isUseradd =  false
-            }
-        }
-
-        document.addEventListener('keydown', handleEscape);
-        
-        this.$once('hook:beforeDestroy', () => {
-            document.addEventListener('keydown', handleEscape)
-        })
+        })        
+    },
+    components:{
+        AddMember
     }
 })
 </script>

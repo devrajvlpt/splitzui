@@ -5,10 +5,12 @@
           <div class="flex justify-between items-center py-3 border-b border-gray-200">
             <div class="flex-1 mt-3">
               <div class="text-gray-700 text-md font-bold">{{this.topic.topic_name}}</div>
-              <div class="flex flex-row">                
-                <div class="text-gray-500 font-bold text-sm cursor-pointer">{{ this.splitz}} |</div>
+              <div class="flex flex-row"> 
+                <div></div>
+                <div class="block bg-indigo-500 rounded text-white text-sm px-2">{{this.topic.total_amount}} INR </div>       
+                <button class="px-2 text-gray-500 font-bold text-sm cursor-pointer focus:overflow-hidden" v-on:click="showUsers" >| {{ this.splitz}} |</button>
                 <!-- TODO Fix the description for TOPIC -->
-                <div class="text-gray-500 font-bold text-sm cursor-pointer px-2">Sharing netflix amount with cousins</div>
+                <div class="text-gray-500 font-bold text-sm cursor-pointer px-2">{{ this.topic.topic_description }}</div>
               </div>
               
             </div>
@@ -30,10 +32,13 @@
                         </svg>
                     </span>                
                     <input 
-                      class="block w-full max-w-xs rounded-lg border border-gray-400 pl-10 pr-4 py-2 text-sm text-gray-600 placeholder-gray-500" 
-                      placeholder="Search"
+                      class="block z-10 w-full max-w-xs rounded-lg border border-gray-400 pl-10 pr-4 py-2 text-sm text-gray-600 placeholder-gray-500 overflow-hidden focus:outline-none focus:border-indigo-500" 
+                      placeholder="Type / for search"
+                      ref="search"
                       v-on:click="show()"
                     />
+                    <button v-if="isSearch" @click="isSearch=false" tabindex="-1" class="fixed inset-0 h-full w-full bg-white opacity-25 cursor-default"></button>
+                    <AccountDropdown v-if="isSearch"> </AccountDropdown>
                 </div>
                 <button>
                   <img class="mt-2 h-8 w-8 text-gray-500" src="https://img.icons8.com/carbon-copy/100/000000/bell.png">
@@ -46,17 +51,13 @@
                   </button>
                   <button v-if="isOpen" @click="isOpen=false" tabindex="-1" class="fixed inset-0 h-full w-full bg-black opacity-50 cursor-default"></button>
                 <div v-if="isOpen" class="absolute right-0 mt-2 py-2 w-48 shadow-xl bg-white rounded-lg">
+                  <router-link to="/accounts/settings">
                       <a href="#" class="block text-gray-800 px-4 py-2 hover:bg-indigo-600 hover:text-white focus:rounded">Account Settings</a>
+                  </router-link>                      
                       <a href="#" class="block text-gray-800 px-4 py-2 hover:bg-indigo-600 hover:text-white focus:rounded">Support</a>
                       <div v-on:click="signout()" class="block text-gray-800 px-4 py-2 hover:bg-indigo-600 hover:text-white focus:rounded">Sign Out</div>
-                  </div>  
-
+                  </div>
               </div>
-
-              
-                
-                
-
             </div>
           </div>
         </header>        
@@ -65,14 +66,14 @@
 </template>
 
 <script>
-// import AccountDropdown from '../components/AccountDropdown'
+import AccountDropdown from '../components/AccountDropdown'
 import { mapState } from 'vuex'
 
 export default {
   
   props:['topic_id'],
   components:{
-    // AccountDropdown
+    AccountDropdown
   },
   created() {
     const handleEscape = (e) =>{
@@ -81,20 +82,39 @@ export default {
       }
 
     }
-
+    
     document.addEventListener('keydown', handleEscape)
     this.$once('hook:beforeDestroy', () => {
       document.addEventListener('keydown', handleEscape)
     })
 
+    
+
+    
   },
   data(){
     return{
       topicHeader:{},
-      isOpen: false      
+      isOpen: false,
+      isSearch:false      
     }
   },
   methods:{
+    showUsers(){
+      this.$emit('showUsers', true);
+    },
+
+    show(){
+      this.isSearch = true;
+      this.$refs.search.focus();
+      const handleSearch = (e) =>{
+          if(e.key === '/' ) {
+            this.isSearch = true
+          }        
+        }
+      document.addEventListener('keydown', handleSearch)
+      
+    },    
     signout(){
         localStorage.removeItem('token');
         localStorage.removeItem('user');

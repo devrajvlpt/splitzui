@@ -49,9 +49,11 @@
             </div>
 
             <div class="mt-1" v-for="user in friends" :key="user.id" v-on:click="selected = user.id" v-bind:class="{'bg-indigo-600 rounded-sm focus:text-white -ml-8 w-64 px-8':selected == user.id}">                
+                <router-link v-bind:to="'/user/' + user.id + '/' + user.first_name">
                     <a href="#"  class="flex justify-between items-center px-0 py-1">
-                        <span class="text-medium leading-tight truncate text-gray-800" >{{ user.last_name }} {{ user.first_name }}</span>                        
-                    </a>                
+                        <span class="text-medium leading-tight truncate text-gray-800" >{{ user.last_name }} {{ user.first_name }}</span>
+                    </a>    
+                </router-link>            
             </div>
         </div>  
         <createTopic></createTopic>
@@ -80,11 +82,13 @@ export default {
             createTopic:false           
         }
     },
+    
     created() {            
         let user_id = localStorage.getItem('user')
         HTTP.get('v1/api/listfriend/' + user_id).
         then(response => {
            this.friends = response.data[0].users
+           this.selected = this.friends[0].id           
         }).
         catch(error =>{
             this.error = error
