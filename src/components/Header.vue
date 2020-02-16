@@ -3,18 +3,24 @@
   <div class="border-b border-gray-400">
         <header class="px-6">
           <div class="flex justify-between items-center py-3 border-b border-gray-200">
-            <div class="flex-1 mt-3">
+            <div v-if="isTopic" class="flex-1 mt-3">
               <div class="text-gray-700 text-md font-bold">{{this.topic.topic_name}}</div>
               <div class="flex flex-row"> 
                 <div></div>
-                <div class="block bg-indigo-500 rounded text-white text-sm px-2">{{this.topic.total_amount}} INR </div>       
-                <button class="px-2 text-gray-500 font-bold text-sm cursor-pointer focus:overflow-hidden" v-on:click="showUsers" >| {{ this.splitz}} |</button>
-                <!-- TODO Fix the description for TOPIC -->
+                <div class="block rounded text-gray-800 text-sm font-extrabold px-2">{{this.topic.total_amount}} INR </div>       
+                <button class="px-2 text-gray-500 font-bold text-sm cursor-pointer focus:overflow-hidden" v-on:click="showUsers" >| {{ this.splitz}} |</button>                
                 <div class="text-gray-500 font-bold text-sm cursor-pointer px-2">{{ this.topic.topic_description }}</div>
-              </div>
-              
+              </div>              
             </div>
-
+            <div v-if="isUser" class="flex-1 mt-3">
+              <div class="text-gray-700 text-md font-bold capitalize">{{this.user.last_name }} {{this.user.first_name }}</div>
+              <div class="flex flex-row"> 
+                <div></div>
+                <div class="block bg-indigo-500 rounded text-white text-sm px-2">{{this.user.user_name }}</div>
+                <div class="text-gray-500 font-bold text-sm cursor-pointer px-2">{{ this.user.email }}</div>
+              </div>              
+            </div>
+            
             <div class="flex items-center mt-2">
                  <div class="relative w-64">
                     <span class="absolute inset-y-0 left-0 pl-2 flex items-center">
@@ -71,7 +77,7 @@ import { mapState } from 'vuex'
 
 export default {
   
-  props:['topic_id'],
+  props:['topic_id', 'route_name'],
   components:{
     AccountDropdown
   },
@@ -88,15 +94,30 @@ export default {
       document.addEventListener('keydown', handleEscape)
     })
 
+    // on load method call for the event
+    var path_name = this.route_name.split("/");
+    var user_or_topic = path_name[1];
+    if (user_or_topic == 'topic'){
+        this.$store.dispatch('loadTopicById', this.topic_id)
+        this.$store.dispatch('loadSplitz', this.topic_id)
+        this.isUser = false
+        this.isTopic = true
+
+    }else if(user_or_topic == 'user'){
+      this.$store.dispatch('loadUser', this.$route.params.id)
+      this.isTopic = false
+      this.isUser = true
+    }
     
 
     
   },
   data(){
-    return{
-      topicHeader:{},
+    return{      
       isOpen: false,
-      isSearch:false      
+      isSearch:false,
+      isTopic:false,
+      isUser:true
     }
   },
   methods:{
@@ -122,9 +143,21 @@ export default {
           this.$router.replace({name:"Login"});
         }
     },
-    init(){                  
-      this.$store.dispatch('loadTopicById', this.topic_id)
-      this.$store.dispatch('loadSplitz', this.topic_id)
+    init(){      
+          var path_name = this.route_name.split("/");
+          var user_or_topic = path_name[1];
+          if (user_or_topic == 'topic'){
+              this.$store.dispatch('loadTopicById', this.topic_id)
+              this.$store.dispatch('loadSplitz', this.topic_id)
+              this.isUser = false
+              this.isTopic = true
+
+          }else if(user_or_topic == 'user'){
+            this.$store.dispatch('loadUser', this.$route.params.id)
+            this.isTopic = false
+            this.isUser = true
+          }
+          
     }
   },
   watch: {
@@ -134,7 +167,8 @@ export default {
   },  
   computed: mapState([
     'topic',
-    'splitz'
+    'splitz',
+    'user',
   ])
   
 }

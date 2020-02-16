@@ -39,10 +39,15 @@ export default {
         login(){
             if (this.username !== "" && this.password !==""){
                 
-                HTTP.post('auth-jwt',{
+                HTTP.post('auth-jwt',
+                {
                     user_name:this.username,
                     password:this.password
-                }).then(response=> {
+                },                
+                {
+                    handlerEnabled: false
+                }
+                ).then(response=> {
                     localStorage.setItem('token',response.data['token']);
                     localStorage.setItem('user', response.data['user'].id)
                     this.$router.replace({name:"Dashboard"});

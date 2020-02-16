@@ -6,9 +6,17 @@ export const HTTP = axios.create({
     baseURL:`http://localhost:9090/`
 })
 
-const requestHandler = (request) => {
-    request.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token')    
-    request.headers['id'] = localStorage.getItem('user')
+const isHandlerEnabled = (config = {}) =>{    
+    // prompt(config.hasOwnProperty('handlerEnabled'))
+    return config.hasOwnProperty('handlerEnabled') && !config.handlerEnabled ? false : true
+}
+
+const requestHandler = (request) => {        
+    if (isHandlerEnabled(request)) {
+        request.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token')    
+        request.headers['id'] = localStorage.getItem('user')
+    }
+    
     return request
 }
 

@@ -35,7 +35,10 @@ export default {
     methods:{
         init(){
             var topic_id = this.$route.params.id
-            HTTP.get('v1/api/splitz/' + topic_id).
+            HTTP.get('v1/api/splitz/' + topic_id,
+                {
+                    handlerEnabled: true
+                }).
                 then(response => {
                 this.users = response.data
                 }).
@@ -51,7 +54,10 @@ export default {
     },
 
     mounted(){
-        HTTP.get('v1/api/splitz/' + this.topic_id).
+        HTTP.get('v1/api/splitz/' + this.topic_id,
+                {
+                    handlerEnabled: true
+                }).
         then(response => {
            this.users = response.data       
         }).

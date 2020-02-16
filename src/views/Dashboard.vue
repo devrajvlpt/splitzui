@@ -11,12 +11,12 @@
         </div>
         <div class="flex-1 bg-gray-750  flex items-center justify-between border-b border-gray-400">
           <!-- Header -->
-        <ChatHeader :topic_id="this.$route.params.id" v-on:showUsers="updateShowUser($event)"></ChatHeader>
+        <ChatHeader :topic_id="this.$route.params.id" :route_name="this.$route.path" v-on:showUsers="updateShowUser($event)"></ChatHeader>
         
         </div>
       </div>
       <div class="flex-1 flex overflow-y-hidden">
-        <div class="bg-gray-100 border-r border-gray-400 w-64 flex-none flex flex-col justify-between">
+        <div class="bg-gray-100 border-r border-gray-400 w-64 flex-none flex flex-col justify-between overflow-auto overflow-y-visible">
           <!-- NavBar -->
           <NavBar class="px-8 py-4" :topics="topics"></NavBar>
           
@@ -33,18 +33,9 @@
             </div>                                      
             <div class="bg-gray-750 h-20 flex mb-2">
               <div class="flex flex-row w-full justify-between">                  
-                  <InputMessage :topic_id="this.$route.params.id"></InputMessage>
-                  <div class="flex flex-row mt-4">
-                    <router-link to="/payment/listoptions">
-                      <button class="block bg-indigo-600 text-xs text-white rounded px-12 mr-2 h-8 py-0 mt-1">
-                            Pay
-                        </button>
-                    </router-link>
-                        
-                    <button class="block bg-indigo-600 text-xs text-white rounded px-8 h-8 mr-2 py-0 mt-1">
-                        Request
-                    </button>
-                </div>
+                  <InputMessage :topic_id="this.$route.params.id">                   
+                  </InputMessage>
+                  
               </div>
                 
               <div class="bg-gray-700 rounded-r flex items-center h-10">                

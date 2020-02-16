@@ -9,23 +9,31 @@ export default new Vuex.Store({
   state: {
     topics:[],
     topic:{},
-    splitz:0
+    splitz:0,
+    user:{},
   },
   mutations: {
     SET_TOPICS(state, topics){
       state.topics = topics;
     },
     SET_TOPIC(state, topic){
-      state.topic = topic
+      state.topic = topic;
     },
     SET_SPLITZ(state, splitz){
-      state.splitz = splitz
+      state.splitz = splitz;
+    },
+    SET_USER(state, user){
+      state.user = user;
     }
   },
   actions: {
     // List all the topics for the currentuser
     loadTopics({commit}){
-      HTTP.get('v1/api/topic').
+      HTTP.get('v1/api/topic', 
+        {
+          handlerEnabled: true
+        }
+        ).
         then(response => response.data).
         then(topics => {
           commit('SET_TOPICS', topics)
@@ -33,7 +41,11 @@ export default new Vuex.Store({
     },
     // Load Topic based on id
     loadTopicById({commit}, topic_id){      
-      HTTP.get('v1/api/topicdetail/' + topic_id + '/').
+      HTTP.get('v1/api/topicdetail/' + topic_id + '/',
+      {
+        handlerEnabled: true
+      }
+      ).
       then(response => response.data)
       .then(topic => {
         commit('SET_TOPIC', topic)
@@ -41,11 +53,27 @@ export default new Vuex.Store({
     },
 
     loadSplitz({commit}, topic_id){
-      HTTP.get('v1/api/splitz/' + topic_id)
+      HTTP.get('v1/api/splitz/' + topic_id,
+      {
+        handlerEnabled: true
+      }
+      )
       .then(response => response.data.length)
       .then(splitz => {
         commit('SET_SPLITZ', splitz)
       })
+    },
+    loadUser({commit}, user_id){
+      HTTP.get('v1/api/user/' + user_id,
+      {
+        handlerEnabled: true
+      }
+      )
+      .then(response => response.data)
+      .then(user => {
+        commit('SET_USER', user)
+      }
+      )
     }
     
   },

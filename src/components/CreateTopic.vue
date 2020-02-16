@@ -79,7 +79,10 @@ export default {
                topic_description:this.topic_description,
                created_by:parseInt(localStorage.getItem('user')),
                updated_by:parseInt(localStorage.getItem('user'))
-           }).
+           },
+            {
+                handlerEnabled: true
+            }).
            then(response => {
                this.$modal.hide('create-topic')
                this.$store.dispatch('loadTopics')               

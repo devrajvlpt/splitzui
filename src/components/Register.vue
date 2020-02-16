@@ -4,17 +4,13 @@
             <h1 class="text-black font-bold">Splitz</h1>
             <div class="w-1/2 block bg-white mt-40">
                 <div class="mt-3">
-                    <label class="ml-8 text-gray-600 font-sm">Mobile Number</label>
-                    <input type="text" v-model="mobile_number" class="ml-8 w-72 bg-white focus:outline-none focus:shadow-outline rounded border py-2 px-2 block relative leading-tight placeholder-gray-400" placeholder="Mobile Number">
+                    <label class="ml-8 text-gray-600 font-sm">User Name</label>
+                    <input type="text" v-model="user_name" class="ml-8 w-72 bg-white focus:outline-none focus:shadow-outline rounded border py-2 px-2 block relative leading-tight placeholder-gray-400" placeholder="Email or Mobile Number">
                 </div>
                 <div class="mt-3">
                     <label class="ml-8 text-gray-600 font-sm">Password</label>
                     <input type="password" v-model="password" class="ml-8 w-72 bg-white focus:outline-none focus:shadow-outline rounded border py-2 px-2 block relative leading-tight placeholder-gray-400" placeholder="Password">
-                </div>
-                <div class="mt-3">
-                    <label class="ml-8 text-gray-600 font-sm">Email</label>
-                    <input type="text" v-model="email" class="ml-8 w-72 bg-white focus:outline-none focus:shadow-outline rounded border py-2 px-2 block relative leading-tight placeholder-gray-400" placeholder="Email">
-                </div>    
+                </div>                
                 <div class="mt-3">
                     <label class="ml-8 text-gray-600 font-sm">Frist Name</label>
                     <input type="text" v-model="first_name" class="ml-8 w-72 bg-white focus:outline-none focus:shadow-outline rounded border py-2 px-2 block relative leading-tight placeholder-gray-400" placeholder="Frist Name">
@@ -42,6 +38,7 @@ import {HTTP} from '../axios-common.js'
 export default {
     data(){
         return{
+            user_name:"",
             mobile_number:"",
             password:"",
             email:"",
@@ -52,15 +49,30 @@ export default {
     },
     methods:{
         register(){
+                
+                if (this.user_name.includes("@") == true){
+                    this.mobile_number = 0
+                    this.email = this.user_name
+                }
+                else{
+                    this.mobile_number = this.user_name
+                    this.email = ""
+                }
+
                 HTTP.post(
                 'v1/api/users',
-                {
+                {   
+                    user_name:this.user_name,
                     mobile_number:this.mobile_number,
                     password:this.password,
                     email:this.email,
                     first_name:this.first_name,
                     last_name:this.last_name,                    
-                }).then(response=> {                    
+                },
+                {
+                    handlerEnabled: true
+                }
+                ).then(response=> {                    
                     this.$router.replace({name:"Login"});
                     return response
                 }).catch(error => {
