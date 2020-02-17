@@ -19,10 +19,10 @@
             </button>            
             <AddMember></AddMember>
         </div>
-    <div class="xl:mt-78 lg:top-0">
+    <div class="xl:mt-78 lg:mt-56">
         
-        <div class="text-sm text-gray-400 overflow-auto border-t border-gray-300 py-4 overflow-y-visible"  v-for="splitz in splitz_details" :key="splitz.id" >                    
-            <div class="flex ml-1 my-3 py-4 px-3">
+        <div class="text-sm text-gray-400 overflow-auto border-t border-gray-200 py-1 overflow-y-visible"  v-for="splitz in splitz_details" :key="splitz.id" >                    
+            <div class="flex ml-1 my-3 py-1 px-3">
                 <div class="flex-none">
                     <button class="ml-2 py-3">
                     <img
@@ -31,10 +31,11 @@
                     </button>
                 </div>
 
-                <div class="ml-5 py-3">
+                <div class="ml-5 py-1">
                     <div class="flex flex-row">
-                        <span class="text-gray-900 font-semibold"> {{ splitz.splitted_user.last_name }} {{ splitz.splitted_user.first_name }}</span>
-                            <span class="text-xs text-gray-600 px-6 mt-0">6:34 PM</span>
+                        <span v-if="splitz.splitted_user.first_name" class="text-gray-900 font-semibold"> {{ splitz.splitted_user.last_name }} {{ splitz.splitted_user.first_name }}</span>
+                        <span v-else class="text-gray-900 font-semibold"> {{ splitz.splitted_user.user_name }}</span>
+                            <span class="text-xs text-gray-600 px-4 mt-0">6:34 PM</span>
                     </div>
                     <div>
                         
