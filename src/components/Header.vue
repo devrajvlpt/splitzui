@@ -4,7 +4,7 @@
         <header class="px-6">
           <div class="flex justify-between items-center py-3 border-b border-gray-200">
             <div v-if="isTopic" class="flex-1 mt-3">
-              <div class="text-gray-700 text-md font-bold">{{this.topic.topic_name}}</div>
+              <div class="text-gray-700 text-md font-bold px-2">{{this.topic.topic_name}}</div>
               <div class="flex flex-row"> 
                 <div></div>
                 <div class="block rounded text-gray-800 text-sm font-extrabold px-2">{{this.topic.total_amount}} INR </div>       
