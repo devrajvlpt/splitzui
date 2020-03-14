@@ -46,7 +46,7 @@
 
           <div v-if="showUserList" class="mt-5 sidebar-users border-l bg-white w-72 flex-none px-3 py-4 overflow-y-auto">
             <div class="flex flex-row">
-              <h3 class="tracking-wide text-sm font-semibold text-gray-600 mb-2 font-mono leading-tight">Topics Members</h3>
+              <h3 class="tracking-wide text-sm font-semibold text-gray-600 mb-2 leading-tight">Topics Members</h3>
             <span>
                 <button @click="showUserList=false" class="overflow-hidden focus:outline-none focus:border-indigo-500">
                 <svg class="h-5 w-5 -mt-1 ml-28 text-gray-600 cursor-pointer" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"

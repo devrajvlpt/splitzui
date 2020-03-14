@@ -4,12 +4,12 @@
         <header class="px-6">
           <div class="flex justify-between items-center py-3 border-b border-gray-200">
             <div v-if="isTopic" class="flex-1 mt-3">
-              <div class="text-gray-700 text-md font-bold px-2">{{this.topic.topic_name}}</div>
+              <div class="text-gray-700 text-md  font-normal px-2">{{this.topic.topic_name}}</div>
               <div class="flex flex-row"> 
                 <div></div>
                 <div class="block rounded text-gray-800 text-sm font-extrabold px-2">{{this.topic.total_amount}} INR </div>       
-                <button class="px-2 text-gray-500 font-bold text-sm cursor-pointer focus:overflow-hidden" v-on:click="showUsers" >| {{ this.splitz}} |</button>                
-                <div class="text-gray-500 font-bold text-sm cursor-pointer px-2">{{ this.topic.topic_description }}</div>
+                <button class="px-2 text-gray-700 font-normal text-md cursor-pointer focus:overflow-hidden" v-on:click="showUsers" >| {{ this.splitz}} |</button>                
+                <div class="text-gray-700 font-normal text-md cursor-pointer px-2">{{ this.topic.topic_description }}</div>
               </div>              
             </div>
             <div v-if="isUser" class="flex-1 mt-3">

@@ -3,8 +3,9 @@
     <!-- <a href="https://rzp.io/l/jl5L9wS" class="block uppercase bg-orange-700">Pay</a>                             -->                                
     <div class="py-2">
         <div class="flex items-center relative ml-4">
-              <button v-on:click="show()" class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-600">
-                <svg class="h-4 w-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+            <button  class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-400">
+            <div>
+                <svg class="h-4 w-4  mt-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                     width="24" height="24"
                     viewBox="0 0 24 24">
                     <path 
@@ -15,12 +16,14 @@
                     d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z">
                     </path>
                 </svg>
-                <div class="px-2 text-sm font-normal text-gray-600 font-black tracking-wide">Add member</div>                                
-            </button>            
-            <AddMember></AddMember>
+                <div class="px-6 -mt-5 text-sm font-normal text-gray-600 tracking-wide">Add Subtopic</div>
+            </div>
+            </button>
+            
         </div>
-    <div class="xl:mt-78 lg:mt-56">
         
+    <div class="xl:mt-78 lg:mt-56">
+      <AddMember></AddMember>
         <div class="text-sm text-gray-400 overflow-auto border-t border-gray-200 py-1 overflow-y-visible"  v-for="splitz in splitz_details" :key="splitz.id" >                    
             <div class="flex ml-1 my-3 py-1 px-3">
                 <div class="flex-none">
@@ -31,11 +34,11 @@
                     </button>
                 </div>
 
-                <div class="ml-5 py-1">
+                <div class="ml-5 py-1" v-if="splitz.admin==true">
                     <div class="flex flex-row">
                         <span v-if="splitz.splitted_user.first_name" class="text-gray-900 font-semibold"> {{ splitz.splitted_user.last_name }} {{ splitz.splitted_user.first_name }}</span>
                         <span v-else class="text-gray-900 font-semibold"> {{ splitz.splitted_user.user_name }}</span>
-                            <span class="text-xs text-gray-600 px-4 mt-0">6:34 PM</span>
+                            <span class="text-xs text-gray-600 px-4 mt-1">6:34 PM</span>
                     </div>
                     <div>
                         
@@ -60,6 +63,38 @@
                         </div>
                     </div>                    
                 </div>
+
+                <div class="ml-5 py-1" v-if="splitz.admin==false">
+                    <div class="flex flex-row">
+                        <span v-if="splitz.splitted_user.first_name" class="text-gray-900 font-semibold"> {{ splitz.splitted_user.user_name }}</span>
+                        <span v-else class="text-gray-900 font-semibold"> {{ splitz.splitted_user.user_name }}</span>
+                            <span class="text-xs text-gray-600 px-4 mt-1">6:34 PM</span>
+                    </div>
+                    <div>
+                        
+                        <span class="text-gray-700 font-smeibold">Owes:</span>
+                        <span v-if="splitz.splitted_user.first_name" class="text-gray-900 font-semibold"> {{ splitz.splitted_user.last_name }} {{ splitz.splitted_user.first_name }}</span>
+                        <span class="text-black text-center px-1"> {{ splitz.splitted_amount }}</span>  
+                        <span class="text-gray-700 font-smeibold">INR</span>
+                    </div>
+
+                    <div class="mt-2">
+                        <span class="px-2 py-1 leading-tight inline-flex items-center bg-indigo-200 rounded">
+                        <svg class="h-2 w-2 text-indigo-600" viewBox="0 0 8 8" fill="currentColor">
+                          <circle cx="4" cy="4" r="3"></circle>
+                        </svg>
+                        <span class="ml-2 text-sm text-indigo-600 font-medium">Not Paid</span>
+                      </span>
+                    </div>
+                     
+                    
+                    <div class="flex flex-row justify-between">
+                        <div class="w-16 items-center ml-3 px-3 mt-2 py-1 bg-indigo-500 hover:bg-indigo-800 rounded shadow-xl hidden">
+                            <button class="text-white  uppercase px-2 overflow-hidden foucs:appearance-none" v-on:click="makePayment()">Pay</button>
+                        </div>
+                    </div>                    
+                </div>
+
             </div>
         </div>
     </div>        
@@ -68,7 +103,7 @@
 
 <script>
 import { HTTP } from '../axios-common'
-import AddMember from './AddMember'
+import AddMember  from '../components/AddMember.vue'
 
 export default ({    
     props:['topic_id'],
@@ -101,9 +136,9 @@ export default ({
         show() {
             this.$modal.show('add-member',{ draggable: true });
         },
-        hide() {
-            this.$modal.hide('add-member');
-        }
+        hideTopic(){
+           this.$modal.hide('create-topic')
+       }
     },
     
     watch: {

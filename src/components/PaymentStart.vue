@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        
         <nav class="flex flex-row">
             <div class="mt-20 py-4 px-56">
                 <span class="text-medium font-semibold px-4 border-b border-indigo-400 py-2 cursor-pointer text-gray-800" >Cards</span>
@@ -25,6 +26,7 @@
                     
 
                 </div>
+
             </div>
 
             
@@ -43,3 +45,5 @@ export default {
     }
 }
 </script>
+
+
