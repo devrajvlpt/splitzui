@@ -19,7 +19,7 @@
                 </svg>
                 </button>
             </div>        
-            <div class="mt-1" v-for="topic in topics" :key="topic.id" v-on:click="selected = topic.id" v-bind:class="{'bg-gray-600 rounded-sm focus:text-white -ml-8 w-64 px-8':selected == topic.id}">
+            <div class="mt-1" v-for="topic in topics" :key="topic.id" v-on:click="selected = topic.id" v-bind:class="{'bg-white rounded-sm focus:text-white -ml-8 w-64 px-8':selected == topic.id}">
                 <router-link v-bind:to="'/topic/' + topic.id + '/' + topic.topic_name">
                     <a href="#"  class="flex justify-between items-center px-0 py-1">
                         <span class="text-medium leading-tight truncate text-gray-800">@{{ topic.topic_name }}</span>

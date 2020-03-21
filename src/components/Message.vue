@@ -3,8 +3,8 @@
     <!-- <a href="https://rzp.io/l/jl5L9wS" class="block uppercase bg-orange-700">Pay</a>                             -->                                
     <div class="py-2">
         <div class="flex items-center relative ml-4">
-            <button  class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-400">
-            <div>
+            <button  class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-400 overflow-hidden focus:outline-none">
+            <div class="">
                 <svg class="h-4 w-4  mt-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                     width="24" height="24"
                     viewBox="0 0 24 24">
@@ -22,40 +22,46 @@
             
         </div>
         
-    <div class="xl:mt-78 lg:mt-56">
+    <div class="xl:mt-0 lg:mt-0">
       <AddMember></AddMember>
-        <div class="text-sm text-gray-400 overflow-auto border-t border-gray-200 py-1 overflow-y-visible"  v-for="splitz in splitz_details" :key="splitz.id" >                    
-            <div class="flex ml-1 my-3 py-1 px-3">
-                <div class="flex-none">
-                    <button class="ml-2 py-3">
-                    <img
-                        class="h-10 w-10 rounded-full object-cover"
-                        src="../assets/images/he.png" alt="Not available">
-                    </button>
-                </div>
-
-                <div class="ml-5 py-1" v-if="splitz.admin==true">
-                    <div class="flex flex-row">
-                        <span v-if="splitz.splitted_user.first_name" class="text-gray-900 font-semibold"> {{ splitz.splitted_user.last_name }} {{ splitz.splitted_user.first_name }}</span>
-                        <span v-else class="text-gray-900 font-semibold"> {{ splitz.splitted_user.user_name }}</span>
-                            <span class="text-xs text-gray-600 px-4 mt-1">6:34 PM</span>
-                    </div>
-                    <div>
-                        
-                        <span class="text-gray-700 font-smeibold">Sharing:</span>
-                        <span class="text-black text-center px-1"> {{ splitz.splitted_amount }}</span>  
-                        <span class="text-gray-700 font-smeibold">INR</span>
-                    </div>
-
-                    <div class="mt-2">
-                        <span class="px-2 py-1 leading-tight inline-flex items-center bg-red-200 rounded">
-                        <svg class="h-2 w-2 text-red-500" viewBox="0 0 8 8" fill="currentColor">
-                          <circle cx="4" cy="4" r="3"></circle>
-                        </svg>
-                        <span class="ml-2 text-sm text-red-500 font-medium">Not Paid</span>
-                      </span>
-                    </div>
-                     
+        <div class="bg-white rounded-lg shadow-lg block ml-10 w-1/5  h-64 mt-10 overflow-y-visible">
+        <div class="text-sm text-gray-400"  v-for="splitz in splitz_details" :key="splitz.id" >                    
+            <div class="flex">            
+                <div v-if="splitz.admin==true" class="px-2 ml-2 mt-3">
+                     <table>
+                        <tbody class="bg-white">
+                            <tr class="border-b border-gray-200">
+                                <td>
+                                    <div class="flex-none">
+                                    <button class="ml-2 py-3">
+                                    <img
+                                        class="h-6 w-6 rounded-full object-cover"
+                                        src="../assets/images/he.png" alt="Not available">
+                                    </button>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-2 whitespace-no-wrap">
+                                    <div class="flex items-center">
+                                        <div class="flex flex-row">
+                                            <span v-if="splitz.splitted_user.first_name" class="text-sm leading-tight font-medium text-gray-600"> {{ splitz.splitted_user.last_name }} {{ splitz.splitted_user.first_name }}</span>
+                                            <span v-else class="text-sm leading-tight font-medium text-gray-600"> {{ splitz.splitted_user.user_name }}</span>
+                                                <!-- <span class="text-xs text-gray-600 px-4 mt-1">6:34 PM</span> -->
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-2 whitespace-no-wrap border-b border-gray-200">
+                                    <div>
+                                        <span class="text-black text-center px-1"> {{ splitz.splitted_amount }}</span>  
+                                    </div>                                        
+                                </td>
+                                <td class="px-4 whitespace-no-wrap border-b border-gray-200">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Spent
+                                    </span>
+                                </td>                        
+                            </tr>
+                        </tbody>
+                    </table>
                     
                     <div class="flex flex-row justify-between">
                         <div class="w-16 items-center ml-3 px-3 mt-2 py-1 bg-indigo-500 hover:bg-indigo-800 rounded shadow-xl hidden">
@@ -96,6 +102,7 @@
                 </div>
 
             </div>
+        </div>
         </div>
     </div>        
     </div>

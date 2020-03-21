@@ -7,11 +7,12 @@ export const HTTP = axios.create({
 })
 
 const isHandlerEnabled = (config = {}) =>{    
-    // prompt(config.hasOwnProperty('handlerEnabled'))
     return config.hasOwnProperty('handlerEnabled') && !config.handlerEnabled ? false : true
 }
 
-const requestHandler = (request) => {        
+const requestHandler = (request) => {     
+    
+       
     if (isHandlerEnabled(request)) {
         request.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token')    
         request.headers['id'] = localStorage.getItem('user')

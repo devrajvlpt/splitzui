@@ -33,8 +33,8 @@
             </div>                                      
             <div class="bg-gray-750 h-20 flex mb-2">
               <div class="flex flex-row w-full justify-between">                  
-                  <InputMessage :topic_id="this.$route.params.id">                   
-                  </InputMessage>
+                  <!-- <InputMessage :topic_id="this.$route.params.id">                    -->
+                  <!-- </InputMessage> -->
                   
               </div>
                 
@@ -89,7 +89,7 @@ import ChatHeader from '../components/Header'
 import NavBar  from '../components/Navbar'
 import Message  from '../components/Message'
 import UserList from  '../components/UserList'
-import InputMessage from '../components/Input'
+// import InputMessage from '../components/Input'
 import PaymentStart from '../components/PaymentStart'
 import { mapState } from 'vuex'
 
@@ -108,7 +108,7 @@ export default {
         NavBar,
         Message,
         UserList,
-        InputMessage,
+        // InputMessage,
         PaymentStart
     },
     methods: {
