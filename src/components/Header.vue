@@ -8,7 +8,7 @@
               <div class="flex flex-row"> 
                 <div></div>
                 <div class="block rounded text-gray-800 text-sm font-extrabold px-2">{{this.topic.total_amount}} INR </div>       
-                <button class="px-2 text-gray-700 font-normal text-md cursor-pointer focus:overflow-hidden" v-on:click="showUsers" >| {{ this.splitz}} |</button>                
+                <button class="px-2 text-gray-700 font-normal text-md cursor-pointer focus:overflow-hidden" v-on:click="showUsers" >| {{ this.splitz }} |</button>                
                 <div class="text-gray-700 font-normal text-md cursor-pointer px-2">{{ this.topic.topic_description }}</div>
               </div>              
             </div>

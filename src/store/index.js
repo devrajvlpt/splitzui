@@ -7,9 +7,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    topics:[],
+    topics:[],    
     topic:{},
-    splitz:0,
+    sub_topics:[],
+    splitz_details:0,
     user:{},
   },
   mutations: {
@@ -19,8 +20,11 @@ export default new Vuex.Store({
     SET_TOPIC(state, topic){
       state.topic = topic;
     },
-    SET_SPLITZ(state, splitz){
-      state.splitz = splitz;
+    SET_SUBTOPICS(state, sub_topics){
+      state.sub_topics = sub_topics;
+    },
+    SET_SPLITZ(state, splitz_details){
+      state.splitz_details = splitz_details;
     },
     SET_USER(state, user){
       state.user = user;
@@ -51,16 +55,37 @@ export default new Vuex.Store({
         commit('SET_TOPIC', topic)
       })
     },
-
+    loadSubTopics({commit}){
+      HTTP.get('v1/api/subsection', 
+      {
+        handlerEnabled: true
+      }
+      ).
+      then(response => response.data).
+      then(sub_topics => {
+        commit('SET_SUBTOPICS', sub_topics)
+      })
+    },
+    loadSubTopicId ({commit}, sub_topic_id){
+      HTTP.get('v1/api/subsection/' + sub_topic_id + '/', 
+      {
+        handlerEnabled: true
+      }
+      ).
+      then(response => response.data).
+      then(sub_topic => {
+        commit('SET_SUBTOPICS', sub_topic)
+      })
+    },
     loadSplitz({commit}, topic_id){
       HTTP.get('v1/api/splitz/' + topic_id,
       {
         handlerEnabled: true
       }
       )
-      .then(response => response.data.length)
-      .then(splitz => {
-        commit('SET_SPLITZ', splitz)
+      .then(response => response.data)
+      .then(splitz_details => {
+        commit('SET_SPLITZ', splitz_details)
       })
     },
     loadUser({commit}, user_id){
