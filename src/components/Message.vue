@@ -27,51 +27,73 @@
                 <div class="flex">
                     
                     <div class="px-2 ml-2 mt-3">                        
-                        <div v-for="sub in sub_topic" :key="sub.id">
-                            {{
-                                sub.sub_topicname
-                            }}
-                        </div>
-                        <table>
-                            <tbody class="bg-white">
-                                <tr class="border-b border-gray-200" v-for="splitz in splitz_details" :key="splitz.id" >
-                                    <td class="-ml-12">
-                                        <button class="ml-1 py-1">
-                                        <img
-                                            class="h-6 w-6 rounded-full object-cover"
-                                            src="../assets/images/he.png" alt="Not available">
-                                        </button>                                    
-                                    </td>
-                                    <td class="px-1 py-2 mr-20 whitespace-no-wrap">
-                                        <div class="flex items-center">
-                                            <div class="flex flex-row">
-                                                <span v-if="splitz.splitted_user.first_name" class="text-sm leading-tight font-medium text-gray-600"> {{ splitz.splitted_user.last_name }} {{ splitz.splitted_user.first_name }}</span>
-                                                <span v-else class="text-sm leading-tight font-medium text-gray-600"> {{ splitz.splitted_user.user_name }}</span>                                                
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="py-2 whitespace-no-wrap border-b border-gray-200">
+                        <div class="text-gray-800 font-semibold px-4 py-2 ml-4" v-for="sub in sub_topics" :key="sub.id">
+                            <span class="border-b border-gray-400">
+                                {{ sub.sub_topicname }}
+                            </span>
+                            
+                            <table class="mt-4">
+                                <tbody class="bg-white">
+                                    <tr class="border-b border-gray-200"  v-for="splitz in splitz_details" :key="splitz.id" >
                                         <div>
-                                            <span class="text-black text-center px-1"> {{ splitz.splitted_amount }}</span>  
-                                        </div>                                        
-                                    </td>
-                                    <td class="px-4 whitespace-no-wrap border-b border-gray-200">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Spent
-                                        </span>
-                                    </td>                                                                                            
-                                </tr>                                                      
-                            </tbody>                        
+                                            <td class="-ml-12 py-2">
+                                            <button class="ml-1 py-1">
+                                            <img
+                                                class="h-6 w-6 rounded-full object-cover"
+                                                src="../assets/images/he.png" alt="Not available">
+                                            </button>                                    
+                                        </td>
+                                        <td class="px-1 py-2 mr-20 whitespace-no-wrap">
+                                            <div class="flex items-center">
+                                                <div class="flex flex-row">
+                                                    <span v-if="splitz.splitted_user.first_name" class="text-sm leading-tight font-medium text-gray-600"> {{ splitz.splitted_user.last_name }} {{ splitz.splitted_user.first_name }}</span>
+                                                    <span v-else class="text-sm leading-tight font-medium text-gray-600"> {{ splitz.splitted_user.user_name }}</span>                                                
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-2 whitespace-no-wrap border-b border-gray-200">
+                                            <div>
+                                                <span class="text-black text-center px-1"> {{ splitz.splitted_amount }}</span>  
+                                            </div>                                        
+                                        </td>
+                                        <td class="px-4 whitespace-no-wrap border-b border-gray-200">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Spent
+                                            </span>
+                                        </td>
+                                        </div>
+                                    </tr>                                                      
+                                </tbody> 
                         </table>
+                        <div class="flex items-center relative ml-4">
+                            <button v-on:click=addUser()  class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-400 overflow-hidden focus:outline-none">
+                            <div class="">
+                                <svg class="h-4 w-4  mt-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                    width="24" height="24"
+                                    viewBox="0 0 24 24">
+                                    <path 
+                                    stroke="currentColor" 
+                                    stroke-width="1"  
+                                    stroke-linecap="round"
+                                    fill-rule="evenodd" 
+                                    d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="py-2 px-2 mt-2 ml-2 text-sm font-normal text-gray-600 tracking-wide">Add User</div>
+                            </button>
+                            </div>
+                        </div>
+                        
                         
                         <div class="flex flex-col mt-3" v-for="(index, input) in subtopic_inputs" :key="index">
                             <SubTopic :input=input v-on:subtopicCreated="fetchSubTopics($event)"></SubTopic>
                         </div>
 
-                        <div class="flex flex-col mt-3" v-for="(index, input) in user_inputs" :key="index">
+                        <div class="flex flex-col mt-3" v-for="(index, splitz_input) in user_inputs" :key="index">
                             <div class="flex flex-row">
-                                <input class="px-3 py-2 border border-gray-400 rounded-sm focus:outline-none text-gray-800 block w-full ml-3" type="text" v-model="input.name"  placeholder="Name"/>
-                                <input class="px-3 py-2 border border-gray-400 rounded-sm focus:outline-none text-gray-800 block w-20 ml-3" type="text" v-model="input.amount" placeholder="Amount"/>
+                                <input class="px-3 py-2 border border-gray-400 rounded-sm focus:outline-none text-gray-800 block w-full ml-3" type="text" v-model="sub_topicname" :key="splitz_input" placeholder="Name"/>
+                                <input class="px-3 py-2 border border-gray-400 rounded-sm focus:outline-none text-gray-800 block w-20 ml-3" type="text" v-model="sub_topicamount" placeholder="Amount"/>
                             </div>
                             <div class="flex flex-row">
                                 <button v-on:click=addSplitz() class="block bg-indigo-700 w-32 ml-4 rounded-sm shadow-md text-white px-2 py-1 mt-2">Add Splitz</button>
@@ -79,28 +101,8 @@
                             </div>
                             
                         </div>
-                        <div>
-                            <div class="flex items-center relative ml-4">
-                                <button v-on:click=addUser()  class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-400 overflow-hidden focus:outline-none">
-                                <div class="">
-                                    <svg class="h-4 w-4  mt-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                                        width="24" height="24"
-                                        viewBox="0 0 24 24">
-                                        <path 
-                                        stroke="currentColor" 
-                                        stroke-width="1"  
-                                        stroke-linecap="round"
-                                        fill-rule="evenodd" 
-                                        d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="py-2 px-2 mt-2 ml-2 text-sm font-normal text-gray-600 tracking-wide">Add User</div>
-                                </button>
+                        <div>                            
                             </div>
-                            </div>
-
-
                     </div>
 
                 </div>
@@ -123,13 +125,14 @@ export default ({
             result: '',
             user_inputs: [],
             subtopic_inputs:[],
-            error:null,
+            error:null            
         }
     },    
     methods:{
         init(){
             var topic_id = this.$route.params.id
             this.$store.dispatch('loadTopicById', topic_id)
+            this.$store.dispatch('loadSubTopicId', topic_id)
         },
         // Make Payment via RazorPay
         makePayment(){
@@ -139,11 +142,11 @@ export default ({
                 
         },
        addUser () {
-           this.user_inputs.push(
-               {
-                   name:'',
-                   amount:0
-               }
+           this.user_inputs.push({
+
+               name: this.sub_topicname,
+               amount: this.sub_topicamount
+            }
            )
        },
        fetchSubTopics (value) {
@@ -157,9 +160,11 @@ export default ({
                }
            )
        },
-       addSplitz () {        
+       addSplitz () {   
+           prompt(this.sub_topicname)     
            var data = {
-            "members_list":["reina@gmail.com"],
+            "members_list":[this.sub_topicname],
+            "amount":this.sub_topicamount,
             "sub_topic_id":this.$route.params.id,
             "created_by":localStorage.getItem('user'),
             "updated_by":localStorage.getItem('user'),
@@ -169,6 +174,7 @@ export default ({
                 var topic_id = this.$route.params.id
                 this.$store.dispatch('loadTopicById', topic_id)
                 this.result = response
+                this.user_inputs = [] 
            }).
            catch(error => {
                this.error = error
@@ -186,7 +192,7 @@ export default ({
     },
     computed: mapState([
         'splitz_details',
-        'sub_topic'
+        'sub_topics'
     ])
 })
 </script>

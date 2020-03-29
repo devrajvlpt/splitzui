@@ -41,7 +41,7 @@
     </div>
 </template>
 <script>
-import {HTTP} from '../axios-common.js'
+import axios from 'axios'
 
 export default {
     data(){
@@ -67,8 +67,8 @@ export default {
                     this.email = ""
                 }
 
-                HTTP.post(
-                'v1/api/users',
+                axios.post(
+                'http://localhost:9090/v1/api/users',
                 {   
                     user_name:this.user_name,
                     mobile_number:this.mobile_number,
@@ -76,9 +76,6 @@ export default {
                     email:this.email,
                     first_name:this.first_name,
                     last_name:this.last_name,                    
-                },
-                {
-                    handlerEnabled: true
                 }
                 ).then(response=> {                    
                     this.$router.replace({name:"Login"});
