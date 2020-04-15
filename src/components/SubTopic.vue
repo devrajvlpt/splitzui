@@ -12,7 +12,7 @@
         </div>
         <div class="flex flex-row">
             <button v-on:click=addSubTopic() class="block bg-indigo-700 w-32 ml-6 rounded shadow-md text-white px-2 py-1 mt-2">Add Subtopic</button>
-            <div class="border-b border-gray-400 text-gray-500 focus:outline-none ml-8 px-8  hover:cursor-pointer py-1 mt-3 w-28">Cancel</div>
+            <button v-on:click=closeSubTopic() class="border-b border-gray-400 text-gray-500 focus:outline-none ml-8 px-8  hover:cursor-pointer py-1 mt-3 w-28">Cancel</button>
         </div>
     </div>
 </template>
@@ -52,6 +52,9 @@ export default {
            catch(error => {
                this.error = error
            })
+      },
+      closeSubTopic(){
+          this.$emit('subtopicCreated', -1)
       }
   }
   

@@ -43,6 +43,7 @@ export default new Vuex.Store({
           commit('SET_TOPICS', topics)
         })
     },
+    
     // Load Topic based on id
     loadTopicById({commit}, topic_id){      
       HTTP.get('v1/api/topicdetail/' + topic_id + '/',
@@ -55,6 +56,7 @@ export default new Vuex.Store({
         commit('SET_TOPIC', topic)
       })
     },
+    // Load sub Topics
     loadSubTopics({commit}){
       HTTP.get('v1/api/subsection', 
       {
@@ -66,6 +68,8 @@ export default new Vuex.Store({
         commit('SET_SUBTOPICS', sub_topics)
       })
     },
+    
+    // Load Sub Topics by IS
     loadSubTopicId ({commit}, sub_topic_id){
       HTTP.get('v1/api/subsection/' + sub_topic_id + '/', 
       {
@@ -77,6 +81,7 @@ export default new Vuex.Store({
         commit('SET_SUBTOPICS', sub_topic)
       })
     },
+
     loadSplitz({commit}, topic_id){
       HTTP.get('v1/api/splitz/' + topic_id,
       {
@@ -88,6 +93,7 @@ export default new Vuex.Store({
         commit('SET_SPLITZ', splitz_details)
       })
     },
+    
     loadUser({commit}, user_id){
       HTTP.get('v1/api/user/' + user_id,
       {
