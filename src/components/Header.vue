@@ -117,7 +117,7 @@ export default {
       isOpen: false,
       isSearch:false,
       isTopic:false,
-      isUser:true
+      isUser:true,
     }
   },
   methods:{
@@ -143,12 +143,13 @@ export default {
           this.$router.replace({name:"Login"});
         }
     },
-    init(){      
+    init(){
+          
           var path_name = this.route_name.split("/");
           var user_or_topic = path_name[1];
           if (user_or_topic == 'topic'){
-              this.$store.dispatch('loadTopicById', this.topic_id)
-              this.$store.dispatch('loadSplitz', this.topic_id)
+              this.$store.dispatch('loadTopicById', this.$route.params.id)
+              this.$store.dispatch('loadSplitz', this.$route.params.id)
               this.isUser = false
               this.isTopic = true
 

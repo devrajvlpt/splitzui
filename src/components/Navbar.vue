@@ -5,7 +5,7 @@
         <div>
             <div class="flex justify-between items-center">
               <h2 class="text-md font-semibold text-gray-700 mt-2 tracking-wide" >Topic</h2>
-              <button class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-600" v-on:click="show()">
+              <button class="ml-2 mt-2 flex items-center text-sm font-normal text-gray-600" v-on:click="show()">
                 <svg class="h-4 w-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                 width="24" height="24"
                 viewBox="0 0 24 24">

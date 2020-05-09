@@ -12,7 +12,7 @@
                 </div>    
 
                 <div class="mt-3 ml-28 xl:ml-64">
-                    <button v-on:click="login()" class="w-72 block rounded shadow-lg px-2 py-1 hover:bg-indigo-500 border-indigo-700 text-white bg-indigo-700">Login</button>
+                    <button v-on:click="login()" class="w-72 block rounded shadow-lg px-2 py-1 hover:bg-yellow-500 border-yellow-100 text-white bg-yellow-500">Login</button>
                 </div>
 
                 <div class="flex flex-row mt-12 px-56">

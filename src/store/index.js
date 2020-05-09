@@ -10,7 +10,7 @@ export default new Vuex.Store({
     topics:[],    
     topic:{},
     sub_topics:[],
-    splitz_details:0,
+    splitz_details:{},
     user:{},
   },
   mutations: {
