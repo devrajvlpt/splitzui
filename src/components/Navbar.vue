@@ -30,7 +30,7 @@
 
             <div class="xl:mt-64 lg:mt-40 flex justify-between items-center">
                 <h2 class="text-md font-semibold text-gray-700 mt-2 tracking-wide" >Split Directly</h2>
-                <button class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-600" v-on:click="show()">
+                <button class="ml-2 mt-2 flex items-center text-sm font-medium text-gray-600" v-on:click="showFriends()">
                 <svg class="h-4 w-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                     width="24" height="24"
                     viewBox="0 0 24 24">
@@ -45,15 +45,16 @@
                 </button>
             </div>
 
-            <div class="mt-1" v-for="user in friends" :key="user.id" v-on:click="selected = user.id" v-bind:class="{'bg-gray-600 rounded-sm focus:text-white -ml-8 w-64 px-8':selected == user.id}">                
-                <router-link v-bind:to="'/user/' + user.id + '/' + user.first_name">
+            <div class="mt-1" v-for="user in friends" :key="user.id" v-on:click="selected = user.id" v-bind:class="{'bg-gray-300 rounded-sm focus:text-white -ml-8 w-64 px-8':selected == user.id}">
+                <router-link v-bind:to="'/user/' + user.id ">
                     <a href="#"  class="flex justify-between items-center px-0 py-1">
-                        <span class="text-medium leading-tight truncate text-gray-800" >{{ user.last_name }} {{ user.first_name }}</span>
+                        <span class="text-medium leading-tight truncate text-gray-900" >{{ user.user_name }}</span>
                     </a>    
                 </router-link>            
             </div>
         </div>  
-        <createTopic></createTopic>        
+        <createTopic></createTopic>
+        <AddMember></AddMember>
       </nav>
  </div>
 
@@ -62,6 +63,7 @@
 
 <script>
 import createTopic from './CreateTopic'
+import AddMember from './AddMember'
 import { HTTP } from '../axios-common.js'
 
 export default {
@@ -73,19 +75,22 @@ export default {
             selected: '',
             friends:[],
             isActive:false,
-            createTopic:false           
+            createTopic:false
         }
     },
     
     created() {            
         let user_id = localStorage.getItem('user')
+        console.log(user_id, "nav bar user id")
         HTTP.get('v1/api/listfriend/' + user_id,
         {
             handlerEnabled:true
         }).
         then(response => {
-           this.friends = response.data[0].users
-           this.selected = this.friends[0].id           
+            console.log(response.data)
+               this.friends = response.data[0].users
+               console.log(this.friends)
+               this.selected = this.friends[0].id
         }).
         catch(error =>{
             this.error = error
@@ -98,10 +103,17 @@ export default {
         },
         hide() {
             this.$modal.hide('create-topic');
-        }
+        },
+        showFriends(){
+            this.$modal.show('add-member',{ draggable: true });
+        },
+        hideFriends() {
+            this.$modal.hide('add-member');
+        },
     },
     components:{
-        createTopic
+        createTopic,
+        AddMember
     }
 }
 </script>

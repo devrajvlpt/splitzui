@@ -37,7 +37,7 @@ const routes = [
     beforeEnter: authGaurd,
     children: [
       { path: '/topic/:id/:topic_name', name: 'Message', component: Message, beforeEnter: authGaurd},      
-      { path: '/user/:id/:first_name',  name: 'Message', component: Message,  beforeEnter: authGaurd},
+      { path: '/user/:id',  name: 'Message', component: Message,  beforeEnter: authGaurd},
       { path:'/payment/listoptions',   name: 'PaymentStart', component: PaymentStart, beforeEnter: authGaurd},
       
     ]
