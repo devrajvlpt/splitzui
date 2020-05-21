@@ -3,7 +3,7 @@
   <div class="flex">    
     <div class="flex-1 flex flex-col min-h-screen h-screen">
       <div class="flex text-white h-12">
-        <div class="bg-yellow-lighter w-64 border-r border-gray-400 flex-none flex items-center justify-between px-3 py-2">
+        <div class="bg-gray-200 w-64 border-r border-gray-400 flex-none flex items-center justify-between px-3 py-2">
           <div class="px-6 text-black font-bold">Splitz</div>          
         <button>
             <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path class="heroicon-ui" d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"></path></svg>
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="flex-1 flex overflow-y-hidden">
-        <div class="bg-yellow-lighter border-r border-gray-400 w-64 flex-none flex flex-col justify-between overflow-auto overflow-y-visible">
+        <div class="bg-gray-200 border-r border-gray-400 w-64 flex-none flex flex-col justify-between overflow-auto overflow-y-visible">
           <!-- NavBar -->
           <NavBar class="px-8 py-4" :topics="topics"></NavBar>
           
